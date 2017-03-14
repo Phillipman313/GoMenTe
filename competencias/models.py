@@ -12,8 +12,8 @@ class Competencia(models.Model):
     participantesCompetencias = models.ManyToManyField(Participantes, through='ParticipantesCompetencias', through_fields=('idPersonaRef', 'idGrupoRef', 'idCompetenciaRef'), db_table='ParticipantesCompetencias')
 
 class ParticipantesCompetencias(models.Model):
-    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    idGrupoRef = models.ForeignKey(Grupo, on_delete=models.PROTECT)
-    idCompetenciaRef = models.ForeignKey(Competencia, on_delete=models.PROTECT)
     porcentaje = models.FloatField('Porcentaje')
-    descripcion = models.TextField('Descripcion')
+    descripcion = models.TextField('Descripcion', null=True, blank=True)
+    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona')
+    idGrupoRef = models.ForeignKey(Grupo, on_delete=models.PROTECT, verbose_name='Grupo')
+    idCompetenciaRef = models.ForeignKey(Competencia, on_delete=models.PROTECT, verbose_name='Competencia')

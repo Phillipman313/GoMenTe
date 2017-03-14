@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Provincia(models.Model):
-    nombre = models.CharField('Nombre', max_length=50)
+    nombre = models.CharField('Nombre', max_length=50, unique=True)
 
 class Canton(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
