@@ -13,8 +13,8 @@ class Programa(models.Model):
 
 class Periodo(models.Model):
     nombre = models.CharField('Nombre', max_length=100, unique=True, editable=False)
-    fechaInicio = models.DateField('Fecha de inicio', default=date.today())
-    fechaFin = models.DateField('Fecha de fin', default=date.today())
+    fechaInicio = models.DateField('Fecha de inicio', default=date.today)
+    fechaFin = models.DateField('Fecha de fin', default=date.today)
     idProgramaRef = models.ForeignKey(Programa, on_delete=models.PROTECT, verbose_name='Programa')
 
 #class Mentores(models.Model):

@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.db import models
 
 # Create your models here.
@@ -15,21 +13,21 @@ class Escuela(models.Model):
     descripcion = models.TextField('Descripcion', null=True, blank=True)
     idTipoEscuelaRef = models.ForeignKey(TipoEscuela, on_delete=models.PROTECT, verbose_name='Tipo de escuela')
     idDistritoRef = models.ForeignKey(Distrito, on_delete=models.PROTECT, verbose_name='Distrito')
-    administrativos = models.ManyToManyField(Persona, through='Administrativos', through_fields=('idPersonaRef', 'idEscuelaRef'), db_table='Administrativos')
-    estudiantes = models.ManyToManyField(Persona, through='Estudiantes', through_fields=('idPersonaRef', 'idEscuelaRef'), db_table='Estudiantes')
+    administrativos = models.ManyToManyField(Persona, through='Administrativos', through_fields=('idEscuelaRef', 'idPersonaRef'), related_name='administrativos')
+    estudiantes = models.ManyToManyField(Persona, through='Estudiantes', through_fields=('idEscuelaRef', 'idPersonaRef'), related_name='estudiantes')
 
 class Puesto(models.Model):
     nombre = models.CharField('Nombre', max_length=50, unique=True)
 
 class Administrativos(models.Model):
-    telefono = models.DecimalField('Telefono', max_digits=50, decimal_places=0)
+    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona', related_name='personasA')
+    idEscuelaRef = models.ForeignKey(Escuela, on_delete=models.PROTECT, verbose_name='Escuela', related_name='escuelasA')
+    idPuestoRef = models.ForeignKey(Puesto, on_delete=models.PROTECT, verbose_name='Puesto', related_name='puestos')
+    telefono = models.CharField('Telefono', max_length=30)
     correo = models.EmailField('Correo')
-    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona')
-    idEscuelaRef = models.ForeignKey(Escuela, on_delete=models.PROTECT, verbose_name='Escuela')
-    idPuestoRef = models.ForeignKey(Puesto, on_delete=models.PROTECT, verbose_name='Puesto')
 
 class Estudiantes(models.Model):
-    fechaInicio = models.DateField('Admision', default=date.today())
+    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona', related_name='personasE')
+    idEscuelaRef = models.ForeignKey(Escuela, on_delete=models.PROTECT, verbose_name='Escuela', related_name='escuelasE')
+    fechaInicio = models.DateField('Admision')
     fechaFin = models.DateField('Salida', null=True, blank=True)
-    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona')
-    idEscuelaRef = models.ForeignKey(Escuela, on_delete=models.PROTECT, verbose_name='Escuela')
