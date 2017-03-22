@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
+
+
 class Persona(models.Model):
     opcionesSexo = (('H', 'Hombre'), ('M', 'Mujer'))
 
@@ -18,4 +22,9 @@ class Persona(models.Model):
     #usuario = models.CharField('Usuario', max_length=50)
     #clave = models.CharField('Clave', max_length=50)
     #confirmacion = models.CharField('Confirmar clave', max_length=50)
+
+@receiver(post_save, sender=User)
+def crearPersona(sender, **kwargs):
+    if kwargs.get('created', False):
+        Persona.objects.get_or_create(usuario=kwargs.get('instance'))
 

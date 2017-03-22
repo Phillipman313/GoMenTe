@@ -24,7 +24,7 @@ class Grupo(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
     idSesionRef = models.ForeignKey(Sesion, on_delete=models.PROTECT, verbose_name='Grupo')
     participantes = models.ManyToManyField(Persona, through='Participantes', through_fields=('idGrupoRef', 'idPersonaRef'), related_name='participantes')
-    facilitadores = models.ManyToManyField(Persona, related_name='facilitadores')
+    facilitadores = models.ManyToManyField(Persona, db_table='Facilitadores')
 
 class TipoParticipante(models.Model):
     nombre = models.CharField('Nombre', max_length=50, unique=True)

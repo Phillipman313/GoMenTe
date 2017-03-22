@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'escuelas.apps.EscuelasConfig',
+    'home.apps.HomeConfig',
     'lugares.apps.LugaresConfig',
     'personas.apps.PersonasConfig',
     'programas.apps.ProgramasConfig',

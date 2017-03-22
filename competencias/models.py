@@ -9,7 +9,7 @@ class Competencia(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
     descripcion = models.TextField('Descripcion', null=True, blank=True)
     idSesionRef = models.ForeignKey(Sesion, on_delete=models.PROTECT, verbose_name='Sesion')
-    participantesCompetencias = models.ManyToManyField(Participantes, through='ParticipantesCompetencias', through_fields=('idPersonaRef', 'idGrupoRef', 'idCompetenciaRef'))
+    participantesCompetencias = models.ManyToManyField(Participantes, through='ParticipantesCompetencias', through_fields=('idCompetenciaRef', 'idPersonaRef'))
 
 class ParticipantesCompetencias(models.Model):
     porcentaje = models.FloatField('Porcentaje')
@@ -17,3 +17,6 @@ class ParticipantesCompetencias(models.Model):
     idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona')
     idGrupoRef = models.ForeignKey(Grupo, on_delete=models.PROTECT, verbose_name='Grupo')
     idCompetenciaRef = models.ForeignKey(Competencia, on_delete=models.PROTECT, verbose_name='Competencia')
+
+    class Meta:
+        unique_together = ('idPersonaRef', 'idGrupoRef', 'idCompentenciaRef')
