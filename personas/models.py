@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
+from photologue.models import Gallery
+from sortedm2m.fields import SortedManyToManyField
 
 
 class Persona(models.Model):
@@ -19,9 +21,13 @@ class Persona(models.Model):
     telefono = models.CharField('Telefono', max_length=30, null=True, blank=True)
     correo = models.EmailField('Correo', unique=True)
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    fotos = SortedManyToManyField('photologue.Photo', related_name='fotos', blank=True)
     #usuario = models.CharField('Usuario', max_length=50)
     #clave = models.CharField('Clave', max_length=50)
     #confirmacion = models.CharField('Confirmar clave', max_length=50)
+
+    def nombreCompleto(self):
+        return self.nombre + ' ' + self.apellido1 + ' ' + self.apellido2
 
 @receiver(post_save, sender=User)
 def crearPersona(sender, **kwargs):

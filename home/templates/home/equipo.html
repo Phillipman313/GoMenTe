@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block equipo %}
+{% for llave, lista in datos.items %}
+<h3 class="section-subheading text-muted">{{ llave }}</h3>
+    {% for x in lista %}
+        {% if forloop.counter0 == 0 or forloop.counter0 % 6 == 0 %}
+        <div class="row">
+        {% else %}
+            <div class="col-sm-2">
+                <div class="team-member">
+                    <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
+                    <h4>{{ x.idPersonaRef.nombreCompleto }}</h4>
+                    <p class="text-muted">Lead Designer</p>
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        {% if forloop.counter0 == 0 or forloop.counter0 % 6 == 0 %}
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}

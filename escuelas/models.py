@@ -26,8 +26,16 @@ class Administrativos(models.Model):
     telefono = models.CharField('Telefono', max_length=30)
     correo = models.EmailField('Correo')
 
+    class Meta:
+        verbose_name = 'Administrativo'
+        verbose_name_plural = 'Administrativos'
+
 class Estudiantes(models.Model):
     idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona', related_name='personasE')
     idEscuelaRef = models.ForeignKey(Escuela, on_delete=models.PROTECT, verbose_name='Escuela', related_name='escuelasE')
     fechaInicio = models.DateField('Admision')
     fechaFin = models.DateField('Salida', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Estudiante'
+        verbose_name_plural = 'Estudiantes'
