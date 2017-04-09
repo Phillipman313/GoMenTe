@@ -24,3 +24,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
