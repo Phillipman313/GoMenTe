@@ -15,4 +15,5 @@ Proyecto inicial Go Mente!
   * photologue v3.6 (https://django-photologue.readthedocs.io/en/stable/pages/installation.html)
   * pytz v3.4+ (https://pypi.python.org/pypi/pytz#downloads)
   * redactor v0.5.1 (https://github.com/douglasmiranda/django-wysiwyg-redactor)
+  * tabbed-admin v1.0.1 (https://pypi.python.org/pypi/django-tabbed-admin)
   
