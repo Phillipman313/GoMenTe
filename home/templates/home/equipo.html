@@ -1,28 +1,20 @@
-{% extends 'home/index.html' %}
+{% load static %}
 
 {% block equipo %}
-{% for llave, lista in datos.items %}
+{% for llave, lista in personas.items %}
     <h3 class="section-subheading text-muted">{{ llave }}</h3>
     {% for x in lista %}
-        {% if forloop.counter0 == 0 or forloop.counter0 % 6 == 0 %}
+        {% if forloop.counter0 == 0 or forloop.counter0|divisibleby:6 %}
         <div class="row">
         {% endif %}
             <div class="col-sm-2">
                 <div class="team-member">
                     <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
                     <h4>{{ x.idPersonaRef.nombreCompleto }}</h4>
-                    <p class="text-muted">Lead Designer</p>
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
+                    <p class="text-muted">{{ x.descripcion }}</p>
                 </div>
             </div>
-        {% if forloop.counter0 == 0 or forloop.counter0 % 6 == 0 %}
+        {% if forloop.last or forloop.counter0 != 0 and forloop.counter0|divisibleby:5 %}
         </div>
         {% endif %}
     {% endfor %}

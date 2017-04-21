@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
 
-{% body %}
+{% block body %}
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
@@ -23,4 +23,5 @@
     {% if forloop.counter0 == 0 or forloop.counter0 % 3 == 0 %}
     </div>
     {% endif %}
+</div>
 {% endblock %}

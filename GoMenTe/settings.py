@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'photologue',
     'sortedm2m',
+    'redactor',
+    'tabbed_admin'
 ]
 
 MIDDLEWARE = [
@@ -86,9 +88,9 @@ WSGI_APPLICATION = 'GoMenTe.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'MenTeBD',
-        'USER': 'MenTeBD',
-        'PASSWORD': 'MenTe',
+        'NAME': 'redmentebd',
+        'USER': 'mentebd',
+        'PASSWORD': 'mente',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -134,6 +136,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'GoMenTe/static')
+]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 
 MEDIA_URL = '/media/'
@@ -147,3 +153,8 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
+
+REDACTOR_OPTIONS = {'lang': 'es', 'plugins': ['alignment', 'fontcolor', 'fontsize', 'table', 'video', 'fullscreen']}
+REDACTOR_UPLOAD = 'editor/'
+
+TABBED_ADMIN_USE_JQUERY_UI = True

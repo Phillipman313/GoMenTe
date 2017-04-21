@@ -21,6 +21,7 @@ from GoMenTe import settings
 
 urlpatterns = [
     url(r'^', include('home.urls')),
+    url(r'^redactor/', include('redactor.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,8 +2,12 @@ from django.db import models
 
 # Create your models here.
 from personas.models import Persona
-from sesiones.models import Sesion, Participantes, Grupo
+from sesiones.models import Sesion, Grupo
 
+
+class Participantes(models.Model):
+    idPersonaRef = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Persona', related_name='personasI')
+    idGrupoRef = models.ForeignKey(Grupo, on_delete=models.PROTECT, verbose_name='Grupo', related_name='gruposI')
 
 class Competencia(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
@@ -20,3 +24,5 @@ class ParticipantesCompetencias(models.Model):
 
     class Meta:
         unique_together = ('idPersonaRef', 'idGrupoRef', 'idCompentenciaRef')
+        verbose_name = 'Participante'
+        verbose_name_plural = 'Participantes'

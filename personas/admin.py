@@ -7,7 +7,7 @@ from personas.models import Persona
 
 class PersonaInline(admin.StackedInline):
      model = Persona
-     verbose_name = 'Persona'
+     verbose_name = 'Informacion personal'
 
 class AdminUser(UserAdmin):
      fieldsets = (
@@ -21,6 +21,13 @@ class AdminUser(UserAdmin):
      list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
      search_fields = ('username', )
      #list_display = ('username', nombre, apellido1, apellido2, identificacion)
+
+     def save_formset(self, request, form, formset, change):
+          formularios = formset.save(commit=False)
+          for parte in formularios:
+               parte.usuario = form.instance
+               parte.save()
+          formset.save_m2m()
 
 #Register your models here.
 admin.site.unregister(User)

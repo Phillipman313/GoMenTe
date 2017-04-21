@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.db.models.signals import post_save
-from django.dispatch.dispatcher import receiver
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 from photologue.models import Gallery
 from sortedm2m.fields import SortedManyToManyField
 
@@ -27,10 +27,10 @@ class Persona(models.Model):
     #confirmacion = models.CharField('Confirmar clave', max_length=50)
 
     def nombreCompleto(self):
-        return self.nombre + ' ' + self.apellido1 + ' ' + self.apellido2
+        if self.apellido2 is not None:
+            return self.nombre + ' ' + self.apellido1 + ' ' + self.apellido2
+        else:
+            return self.nombre + ' ' + self.apellido1
 
-@receiver(post_save, sender=User)
-def crearPersona(sender, **kwargs):
-    if kwargs.get('created', False):
-        Persona.objects.get_or_create(usuario=kwargs.get('instance'))
-
+    def __str__(self):
+        return self.nombreCompleto() + '(' + self.usuario.username + ')'
