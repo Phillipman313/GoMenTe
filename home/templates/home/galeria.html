@@ -1,5 +1,47 @@
 {% extends 'home/base.html' %}
 
+{% block menu %}
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top affix">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!-- <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#quees">¿Qué es?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#equipo">Equipo</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#programas">Programas</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Aliados</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'galeria' %}">Galería</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contáctenos</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <div class="row">
@@ -8,20 +50,28 @@
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
     </div>
-    {% for x in datos %}
-    {% if forloop.counter0 == 0 or forloop.counter0 % 3 == 0 %}
-    <div class="row text-center">
-    {% endif %}
-        <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="service-heading">E-Commerce</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+
+    <div class="row">
+    {% for x in fotos %}
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="portfolio-item">
+                {% with i=forloop.counter|stringformat:"s" %}
+                <a href={{ "#portfolioModal"|add:i }} class="portfolio-link" data-toggle="modal">
+                {% endwith %}
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            Ver más
+                        </div>
+                    </div>
+                    <img src="{{ x.photos.first.image.url }}" class="img-responsive" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{ x.title }}</h4>
+                    <p class="text-muted">{{ x.photos.all|length }}</p>
+                </div>
+            </div>
         </div>
-    {% if forloop.counter0 == 0 or forloop.counter0 % 3 == 0 %}
+    {% endfor %}
     </div>
-    {% endif %}
 </div>
 {% endblock %}

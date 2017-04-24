@@ -33,3 +33,14 @@ class Acerca(models.Model):
     class Meta:
         verbose_name = 'Acerca'
         verbose_name_plural = 'Acerca'
+
+class Post(models.Model):
+    titlo = models.CharField('Titulo', max_length=100)
+    foto = models.ImageField('Foto', upload_to='editor', blank=True)
+    informacion = RedactorField(verbose_name='Informacion')
+    publicacion = models.DateTimeField('Publicacion')
+    actualizacion = models.DateTimeField('Ultima actualizacion', default=timezone.now())
+    autor = models.ForeignKey(Persona, on_delete=models.PROTECT, verbose_name='Autor')
+
+    class Meta:
+        verbose_name = 'Post'

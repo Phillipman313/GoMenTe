@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+<div class="container">
+{% for x in entradas %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">{{ x.titulo }}</h2>
+            <h3 class="section-subheading text-muted">{{ x.publicacion }}</h3>
+            <img src="{{ x.foto.url }}" class="img-responsive" alt="">
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

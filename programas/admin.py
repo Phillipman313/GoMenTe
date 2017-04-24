@@ -19,7 +19,7 @@ class PatrocinadoresInline(admin.StackedInline):
 class ProgramaAdmin(TabbedModelAdmin):
     model = Programa
 
-    tab_programa = ((None, {'fields': ('nombre', 'corto', 'descripcion', 'logo', 'galeria')}), PatrocinadoresInline)
+    tab_programa = ((None, {'fields': ('nombre', 'corto', 'descripcion', 'fechaInicio', 'fechaFin', 'lugar', 'direccion', 'idDistritoRef', 'logo', 'galeria')}), PatrocinadoresInline)
     tab_mentores = (MentoresInline, )
     tab_capacitadores = (CapacitadoresInline, )
 

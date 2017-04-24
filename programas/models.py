@@ -14,7 +14,6 @@ class Programa(models.Model):
     nombre = models.CharField('Nombre', max_length=50, unique=True)
     corto = models.CharField('Corto', max_length=50, unique=True)
     descripcion = models.TextField('Descripcion')
-    fecha = models.CharField('Nombre', max_length=100, unique=True, editable=False)
     fechaInicio = models.DateField('Fecha de inicio', default=date.today)
     fechaFin = models.DateField('Fecha de fin', default=date.today)
     lugar = models.CharField('Nombre del lugar', max_length=100)

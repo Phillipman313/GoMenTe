@@ -1,0 +1,75 @@
+{% load static %}
+
+{% for x in eventos %}
+    {% with i=forloop.counter|stringformat:"s" %}
+    <div class="portfolio-modal modal fade" id={{ "portfolioModal"|add:i }} tabindex="-1" role="dialog" aria-hidden="true">
+    {% endwith %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>{{ x.name }}</h2>
+                                <p class="item-intro text-muted">{{ x.corto }}</p>
+                                <img class="img-responsive img-centered" src="{% static "home/img/portfolio/roundicons-free.png" %}" alt="">
+                                <p>{{ x.descripcion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Mentores -->
+                            <p><h3>Mentores</h3></p>
+                            <ul class="list-inline">
+                            {% for e in x.mentores.all %}
+                                <li>
+                                    <div class="team-member">
+                                        <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
+                                        <h4>{{ e.idPersonaRef.nombreCompleto }}</h4>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                            <!-- Capacitadores -->
+                            <p><h3>Capacitadores</h3></p>
+                            <ul class="list-inline">
+                            {% for c in x.capacitadores.all %}
+                                <li>
+                                    <div class="team-member">
+                                        <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
+                                        <h4>{{ c.idPersonaRef.nombreCompleto }}</h4>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                            <!-- Patrocinadores -->
+                            <p><h3>Patrocinadores</h3></p>
+                            <ul class="list-inline">
+                            {% for o in x.patrocinadores.all %}
+                                <li>
+                                    <div class="team-member">
+                                        <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
+                                        <h4>{{ o.idPersonaRef.nombreCompleto }}</h4>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i>Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

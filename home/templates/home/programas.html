@@ -1,92 +1,33 @@
-{% extends 'home/index.html' %}
+{% load static %}
 
 {% block programas %}
-<ul class="list-inline">
-    {% for x in datos %}
-        <div class="portfolio-item">
-            <a href="#portfolioModal" + {{ forloop.counter0 }} class="portfolio-link" data-toggle="modal">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Programas</h2>
+            <h3 class="section-subheading text-muted">MenTe en Acción es un programa de 12 semanas diseñado con el fin de incursionar a más mujeres en el campo de la ciencia y tecnología.</h3>
+        </div>
+    </div>
+
+    <div class="row text-center">
+    {% for x in eventos %}
+        <div class="portfolio-item div-horizontal">
+            {% with i=forloop.counter|stringformat:"s" %}
+            <a href={{ "#portfolioModal"|add:i }} class="portfolio-link" data-toggle="modal">
+            {% endwith %}
                 <div class="portfolio-hover">
                     <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
+                        Ver más
                     </div>
                 </div>
-                <img src="{% static "home/img/portfolio/roundicons.png" %}" class="img-responsive" alt="">
+                <img src="{{ x.logo.url }}" class="img-responsive" alt="">
             </a>
             <div class="portfolio-caption">
                 <h4>{{ x.nombre }}</h4>
                 <p class="text-muted">{{ x.corto }}</p>
             </div>
         </div>
-
-        <div class="portfolio-modal modal fade" id="portfolioModal" + {{ forloop.counter0 }} tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal">
-                        <div class="lr">
-                            <div class="rl">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 col-lg-offset-2">
-                                <div class="modal-body">
-                                    <h2>{{ x.name }}</h2>
-                                    <p class="item-intro text-muted">{{ x.corto }}</p>
-                                    <img class="img-responsive img-centered" src="{% static "home/img/portfolio/roundicons-free.png" %}" alt="">
-                                    <p>{{ x.descripcion }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <!-- Mentores -->
-                                <p><h3>Mentores</h3></p>
-                                <ul class="list-inline">
-                                {% for e in x.mentores %}
-                                    <li>
-                                        <div class="team-member">
-                                            <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
-                                            <h4>{{ e.idPersonaRef.nombreCompleto }}</h4>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                                </ul>
-                                <!-- Capacitadores -->
-                                <p><h3>Capacitadores</h3></p>
-                                <ul class="list-inline">
-                                {% for c in x.capacitadores %}
-                                    <li>
-                                        <div class="team-member">
-                                            <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
-                                            <h4>{{ c.idPersonaRef.nombreCompleto }}</h4>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                                </ul>
-                                <!-- Patrocinadores -->
-                                <p><h3>Patrocinadores</h3></p>
-                                <ul class="list-inline">
-                                {% for o in x.patrocinadores %}
-                                    <li>
-                                        <div class="team-member">
-                                            <img src="{% static "home/img/team/1.jpg" %}" class="img-responsive img-circle" alt="">
-                                            <h4>{{ o.idPersonaRef.nombreCompleto }}</h4>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 col-lg-offset-2">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i>Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     {% endfor %}
-</ul>
+    </div>
+</div>
 {% endblock %}
